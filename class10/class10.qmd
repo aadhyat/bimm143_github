@@ -1,0 +1,217 @@
+---
+title: "Class 10: Structural Bioinformatics (pt. 1)"
+author: "Aadhya Tripathi (PID: A17878439)"
+toc: true
+format: pdf
+---
+
+## The PDB Database
+
+The [Protein Data Bank (PDB)](http://www.rcsb.org/) is the main repository of biomolecular structure data. We will see what is in it.
+
+```{r}
+stats <- read.csv("pdb_stats.csv", row.names = 1)
+stats
+```
+
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+n.sums <- colSums(stats)
+n <- n.sums/n.sums["Total"]
+round(n, digits=2)
+
+round((n["X.ray"] + n["EM"]), digits=2)
+```
+94% of strucutres solved by X-ray and EM.
+
+
+> What is the total number of entries in the PDB?
+
+```{r}
+total <- n.sums["Total"]
+total
+```
+
+> Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+n.proteins <- stats$Total[1]
+round(n.proteins/total, digits=2)
+```
+86% of structures are protein.
+
+## Using Molstar
+
+We will use the main [Molstar viewer online](https://molstar.org/viewer/)
+
+![First view of HIV-Pr dimer with bound inhibitor](1HSG.png)
+
+> Q. Generate and insert an image of the HIV-Pr cartoon representation colored by secondary strucutre, showing the inhibitor (ligand) in ball and stick.
+
+![HIV-Pr colored by secondary structure.](1HSG-cartoon.png)
+
+> Q4. Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+This is a simplified view for visibility.
+
+> Q5. There is a critical “conserved” water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have?
+
+H2O 308
+
+> Q6. Generate and insert an image showing catalytic ASP 25 residue as ball and stick, and the all-important active site water molecule as space-fill.
+
+![HIV-Pr with ASP 25 and active site H2O 308 highlighted.](1HSG-water308.png)
+
+## The Bio3D Package for structural bioinformatics
+
+```{r}
+library(bio3d)
+
+hiv <- read.pdb("1hsg")
+hiv
+```
+> Q7. How many amino acid residues are there in this pdb object? 
+
+198
+
+> Q8. Name one of the two non-protein residues? 
+
+MK1
+
+> Q9. How many protein chains are in this structure? 
+
+2
+
+
+```{r}
+head(hiv$atom)
+```
+
+```{r}
+pdbseq(hiv)
+```
+
+Let's try out the new **bio3dview** package that is not yet on CRAN. 
+We can use the **remotes** package to install any R package from GitHub. 
+
+### Quick Viewing of PDBs
+
+```{r}
+library(bio3dview)
+library(NGLVieweR)
+```
+
+```{r}
+#sele <- atom.select(hiv, resno=25)
+
+#view.pdb(hiv, backgroundColor = "lightgreen",
+#         highlight = sele, 
+#         highlight.style = "spacefill") |>
+#  setSpin()
+```
+
+### Prediction of Protein Flexibility
+
+```{r}
+adk <- read.pdb("6s36")
+m <- nma(adk)
+plot(m)
+```
+
+Write out our results as a small trajectory movie:
+
+```{r}
+#mktrj(m, file="results.pdb")
+```
+
+Alternative viewing of flexible parts:
+```{r}
+#view.nma(m)
+```
+
+## Comparitive protein structure analysis with PCA
+
+We start with a databse ID "1ake_A"
+
+```{r}
+library(bio3d)
+
+id <- "1ake_A"
+aa <- get.seq(id)
+```
+
+```{r}
+aa
+```
+
+```{r}
+blast <- blast.pdb(aa)
+```
+
+Glance at the results:
+```{r}
+head(blast$hit.tbl)
+```
+
+Make a plot of the blast results:
+```{r}
+hits <- plot(blast)
+```
+
+Peak at the "top hits" PDB IDs:
+```{r}
+head(hits$pdb.id)
+```
+
+Now we can download these "top hits", which will all be ADK structures in the PDB databse.
+g
+```{r}
+files <- get.pdb(hits$pdb.id, path = "pdbs", split=TRUE, gzip=TRUE)
+```
+
+We need a package from BioConductor. To set this up, we need to install a package called **BiocManager** from CRAN.
+
+Now we can use `install()` function from this package like this:
+`BiocManager::install("msa")`
+
+Align and superimpose the saved proteins:
+
+```{r}
+pdbs <- pdbaln(files, fit=TRUE, exefile="msa")
+```
+
+Let's have a look at our structures after superimposing:
+```{r}
+library(bio3dview)
+view.pdbs(pdbs)
+```
+
+Results colored by residue:
+```{r}
+view.pdbs(pdbs, colorScheme = "residueIndex")
+```
+
+We can run functions like `rmsd()`, `rmsf()`, and of course, `pca()`.
+```{r}
+pc.xray <- pca(pdbs)
+plot(pc.xray)
+```
+```{r}
+# Calculate RMSD
+rd <- rmsd(pdbs)
+
+# Structure-based clustering
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k=3)
+
+plot(pc.xray, 1:2, col="grey50", bg=grps.rd, pch=21, cex=1)
+```
+
+
+
+Make a short movie of the major "motion" or structural difference in the dataset. This is called a "trajectory".
+```{r}
+mktrj(pc.xray, file="results.pdb")
+```
+
