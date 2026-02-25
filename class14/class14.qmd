@@ -1,0 +1,230 @@
+---
+title: "Class 14: RNASeq Mini-Project"
+author: "Aadhya Tripathi (PID: A17878439"
+format: pdf
+---
+
+## Background
+
+The data for today's mini-project comes from a knock-down study of an important HOX gene.
+
+## Data Import
+
+Import counts data and metadata:
+```{r import data files}
+countData <- read.csv("GSE37704_featurecounts.csv", row.names = 1)
+colData <- read.csv("GSE37704_metadata.csv", row.names = 1)
+```
+
+Quick look at the imports:
+```{r inspect imports}
+head(countData)
+head(colData)
+```
+
+
+### Data Cleanup
+
+Remove `length` column in `countData`:
+```{r remove length in countData}
+countData <- as.matrix(countData[,-1])
+```
+
+Check if the `countData` columns and `colData` rows match:
+```{r check counts and meta alignment}
+colnames(countData) == rownames(colData)
+```
+
+Remove genes with no expression:
+```{r remove 0 exp genes}
+countData = countData[rowSums(countData) > 0, ]
+head(countData)
+```
+
+## DESeq Analysis
+
+### Setting up the DESeq object
+
+```{r load DESeq, message=FALSE}
+library(DESeq2)
+```
+
+Build the required DESeqDataSet object for DESeq analysis:
+```{r DESeq obj setup}
+dds <- DESeqDataSetFromMatrix(countData = countData,
+                             colData = colData,
+                             design = ~condition)
+```
+
+### Running DESeq
+
+Run DESeq on dds:
+```{r run DESeq}
+dds <- DESeq(dds)
+```
+
+### Getting Results
+
+Save results from running DESeq:
+```{r save DESeq results}
+res <- results(dds)
+head(res)
+```
+
+## Visualization: Volcano Plot
+
+```{r load ggplot2}
+library(ggplot2)
+```
+
+Create basic volcano plot of Log2 Fold Change vs -Log of Adjusted P-value in DESeq results:
+```{r initial volcano plot}
+ggplot(res) +
+      aes(x=log2FoldChange,
+          y=-log(padj)) +
+      geom_point()
+```
+Improve the plot with color and lines to highlight significant changes.
+
+```{r colors for volcano plot}
+my_cols <- rep("gray", nrow(res))
+my_cols[abs(res$log2FoldChange) > 2 ] <- "blue"
+my_cols[res$padj>=0.01] <- "gray"
+```
+
+```{r colored volcano plot}
+ggplot(res) +
+      aes(x=log2FoldChange,
+          y=-log(padj)) +
+      geom_point(col=my_cols) +
+      geom_vline(xintercept = c(-2,+2), col="red") +
+      geom_hline(yintercept = -log(0.01), col="red") +
+      labs(x = "Log2(Fold Change)",
+           y = "-Log(Adjusted P-value)",
+           title = "Volcano plot of Log2(Fold Change) vs -Log(Adjusted P-value)")
+```
+Save the results of DESeq analysis to a csv file:
+```{r save results csv}
+write.csv(res, file="results.csv")
+```
+
+## Add Annotation
+
+```{r load annotations packages}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+```
+List of all available key types for mapping:
+```{r mapping categories}
+columns(org.Hs.eg.db)
+```
+Add columns to `res` to save information on the SYMBOL, ENTREZ ID, and gene names.
+```{r}
+res$symbol = mapIds(org.Hs.eg.db,
+                    keys=rownames(res), 
+                    keytype="ENSEMBL",
+                    column="SYMBOL",
+                    multiVals="first")
+
+res$entrez = mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="ENTREZID",
+                    multiVals="first")
+
+res$name =   mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="GENENAME",
+                    multiVals="first")
+```
+
+Quick look at res with the new columns:
+```{r}
+head(res)
+```
+
+Save the annotated results to a csv file:
+```{r save annotated results csv}
+write.csv(res, file="results_annotated.csv")
+```
+
+## Pathway Analysis
+
+```{r load pathway analysis packages}
+library(pathview)
+library(gage)
+library(gageData)
+```
+
+### KEGG
+
+```{r}
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+kegg.sets.hs = kegg.sets.hs[sigmet.idx.hs]
+```
+
+Create foldchanges vector, which is needed for `gage()`
+```{r}
+foldchanges <- res$log2FoldChange
+names(foldchanges) <- res$entrez
+```
+
+```{r}
+keggres <- gage(foldchanges, gsets=kegg.sets.hs)
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa04110")
+```
+![](hsa04110.pathview.png)
+
+### GO
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+```
+
+```{r}
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchanges, gsets=gobpsets)
+```
+```{r}
+head(gobpres$less)
+```
+
+### Reactome
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+```
+
+```{r}
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

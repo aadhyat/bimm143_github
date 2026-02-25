@@ -1,0 +1,54 @@
+---
+title: "Class 12, pt. 2: Population Analysis"
+author: "Aadhya Tripathi (PID: A17878439)"
+toc: true
+format: pdf
+---
+
+## Population Scale Analysis
+
+> Q13. Read this file into R and determine the sample size for each genotype and their
+corresponding median expression levels for each of these genotypes.
+
+```{r}
+# Import the file
+results <- read.table("rs8067378_ENSG00000172057.6.txt")
+head(results)
+```
+
+Gives the sample size of each genotype:
+```{r}
+table(results$geno)
+```
+Calculate the median expression:
+```{r}
+AA <- results[results$geno == "A/A",]
+AG <- results[results$geno == "A/G",]
+GG <- results[results$geno == "G/G",]
+
+median(AA$exp)
+median(AG$exp)
+median(GG$exp)
+```
+A|A has a sample size of 108 and median expression 31.24847.
+A|G has a sample size of 233 and median expression 25.06486
+G|G has a sample size of 121 and median expression 20.07363
+
+> Q14. Generate a boxplot with a box per genotype, what could you infer from the relative
+expression value between A/A and G/G displayed in this plot? Does the SNP effect the
+expression of ORMDL3?
+
+Boxplot of the genotype vs expression:
+```{r}
+library(ggplot2)
+```
+
+```{r}
+boxp <- ggplot(results) +
+        aes(geno, exp, fill = geno) +
+        geom_boxplot()
+
+boxp
+```
+
+The G/G genotype decreases expression compared to A/A, based on the lower median value for G/G. The SNP decreases the expression of ORMDL3.
