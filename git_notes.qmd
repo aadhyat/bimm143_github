@@ -31,6 +31,11 @@ The core steps to using git involve
    In command line:
    `git push`
    
+6. Git Pull to sync FROM GitHub
+   In RStudio, you can use the down arrow.
+   In command line:
+   `git pull`
+   
 You can check your project history and status:
     `git status`
     `git log` (push Q to exit)
