@@ -1,0 +1,19 @@
+## Core Unix Commands 
+
+various commands:
+
+curl: Download files from the web or ftp
+wget: Download files from the web
+tar -zxvf: UnTar (unpackage) Tar archive files
+gunzip: UnZip files
+$PATH: 
+
+
+## Class 17
+
+ssh -i ~/Downloads/bioinf_aadhyat.pem ubuntu@ec2-34-209-250-157.us-west-2.compute.amazonaws.com
+
+export KEY=~/Downloads/bioinf_aadhyat.pem
+export SERVER=ubuntu@ec2-34-209-250-157.us-west-2.compute.amazonaws.com
+
+ssh -i $KEY $SERVER
