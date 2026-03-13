@@ -75,10 +75,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#a-first-function" id="toc-a-first-function" class="nav-link" data-scroll-target="#a-first-function">A first function</a></li>
+  <li><a href="#a-second-function" id="toc-a-second-function" class="nav-link" data-scroll-target="#a-second-function">A second function</a></li>
+  <li><a href="#a-cool-new-function" id="toc-a-cool-new-function" class="nav-link" data-scroll-target="#a-cool-new-function">A cool new function</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="class06.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -174,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">size=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5 8 1 6</code></pre>
+<pre><code>[1] 2 9 3 4</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -183,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">size=</span><span class="dv">12</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  8 10  1  6  4  9 10  9 10  8  8  2</code></pre>
+<pre><code> [1]  8  3  2  4  3  9  9  6  7  6 10  1</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -193,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(bases, <span class="at">size=</span><span class="dv">12</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "G" "A" "A" "C" "G" "T" "G" "A" "G" "T" "T" "C"</code></pre>
+<pre><code> [1] "T" "T" "T" "G" "G" "C" "C" "T" "A" "C" "C" "G"</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -209,8 +220,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "C" "T" "G" "C" "A" "T" "G" "T" "G" "A" "G" "T" "C" "G" "G" "T" "T" "T" "T"
-[20] "G"</code></pre>
+<pre><code> [1] "T" "C" "G" "G" "T" "C" "C" "A" "A" "T" "A" "C" "G" "T" "A" "A" "T" "C" "A"
+[20] "C"</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -226,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "TAATGATCCA"</code></pre>
+<pre><code>[1] "ACGGCTTTCG"</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -248,11 +259,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>(<span class="at">n=</span><span class="dv">8</span>, <span class="at">fasta=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "G" "C" "G" "G" "G" "T" "T" "G"</code></pre>
+<pre><code>[1] "T" "C" "C" "A" "T" "G" "G" "T"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>(<span class="at">n=</span><span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "TTGATAGCAGCAACGGATGT"</code></pre>
+<pre><code>[1] "TAGCAGGTATCTATCGCCGA"</code></pre>
 </div>
 </div>
 </section>
@@ -275,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_protein</span>(<span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "THDSRENGAPRH"</code></pre>
+<pre><code>[1] "QFVEVRNCMTCG"</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -288,19 +299,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&gt;seq6
-HCKAVW 
+CGNTEQ 
 &gt;seq7
-NISAWNR 
+VDDSTHA 
 &gt;seq8
-QAHAKPYG 
+WSSQGTKF 
 &gt;seq9
-EFLRWNMDW 
+LNDTSRAKL 
 &gt;seq10
-GYNFAVWCVI 
+WRIVYQSTLQ 
 &gt;seq11
-SWIMTLSIEAH 
+YLCCKGQCLNV 
 &gt;seq12
-KYCSQSMDCYLE </code></pre>
+NTAHWCYDCGDS </code></pre>
 </div>
 </div>
 </section>
