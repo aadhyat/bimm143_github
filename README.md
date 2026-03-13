@@ -5,28 +5,28 @@ My classwork from [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San D
 
 *Introductory Material*
 
-Class 4: [Introductory data analysis with R](class04/class04.pdf)
+Class 4: [Introductory data analysis with R](class04/class04.md)
 
 Class 5: [Data Visualization with ggplot](class05/class05.md)
 
-Class 6: [Creating R functions](class06/class06.pdf)
+Class 6: [Creating R functions](class06/class06.md)
 
-Class 7: [Introduction to machine learning](https://htmlpreview.github.io/?https://raw.githubusercontent.com/aadhyat/bimm143_github/refs/heads/main/class07/class07.qmd)
+Class 7: [Introduction to machine learning](class07/class07.md)
 
-Class 8: [Unsupervised Learning]()
+Class 8: [Unsupervised Learning](class08/class08.md)
 
-Class 9: [Exploratory Analysis]()
+Class 9: [Exploratory Analysis](class09/class09.md)
 
 *Structural Bioinformatics*
 
-Class 10: [Structural Bioinformatics]()
+Class 10: [Structural Bioinformatics](class10/class10.md)
 
-Class 11: [AlphaFold]()
+Class 11: [AlphaFold](class11/class11.md)
 
-Class 12: [High throughput sequencing]()
+Class 12: [High throughput sequencing](class12/class12.md)
 
-Class 13: [Transcriptomics, RNA-Seq analysis]()
+Class 13: [Transcriptomics, RNA-Seq analysis](class13/class13.md)
 
-Class 14: [RNA-Seq mini project]()
+Class 14: [RNA-Seq mini project](class14/class14.md)
 
-Class 17: [Analyzing sequencing data in the cloud]()
+Class 17: [Analyzing sequencing data in the cloud](class17/class17.md)
