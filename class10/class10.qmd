@@ -3,6 +3,7 @@ title: "Class 10: Structural Bioinformatics (pt. 1)"
 author: "Aadhya Tripathi (PID: A17878439)"
 toc: true
 format: pdf
+prefer-html: true
 ---
 
 ## The PDB Database
