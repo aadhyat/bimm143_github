@@ -5,7 +5,7 @@ My classwork from [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San D
 
 *Introductory Material*
 
-Class 4: [Introductory data analysis with R](class04/class04.md)
+Class 4: [Introductory data analysis with R](class04/class04.pdf)
 
 Class 5: [Data Visualization with ggplot](class05/class05.md)
 
@@ -23,7 +23,7 @@ Class 10: [Structural Bioinformatics](class10/class10.md)
 
 Class 11: [AlphaFold](class11/class11.md)
 
-Class 12: [High throughput sequencing](class12/class12.md)
+Class 12: [High throughput sequencing](class12/class12_pt2.md)
 
 Class 13: [Transcriptomics, RNA-Seq analysis](class13/class13.md)
 
