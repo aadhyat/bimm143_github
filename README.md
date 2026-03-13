@@ -10,8 +10,21 @@ Class 5: [Data Visualization with ggplot](class05/class05.pdf)
 Class 6: [Creating R functions](class06/class06.pdf)
 
 Class 7: [Introduction to machine learning](https://htmlpreview.github.io/?https://raw.githubusercontent.com/aadhyat/bimm143_github/refs/heads/main/class07/class07.qmd)
-...
 
-*Genomics*
+Class 8: [Unsupervised Learning]()
 
-*Structural*
+Class 9: [Exploratory Analysis]()
+
+*Structural Bioinformatics*
+
+Class 10: [Structural Bioinformatics]()
+
+Class 11: [AlphaFold]()
+
+Class 12: [High throughput sequencing]()
+
+Class 13: [Transcriptomics, RNA-Seq analysis]()
+
+Class 14: [RNA-Seq mini project]()
+
+Class 17: [Analyzing sequencing data in the cloud]()
