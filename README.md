@@ -1,5 +1,5 @@
 # BIMM143 Bioinformatics Coursework
-My classwork from [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San Diego.
+My coursework from [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San Diego.
 
 ## Index of Material
 
