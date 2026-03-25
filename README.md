@@ -1,5 +1,5 @@
 # BIMM143 Bioinformatics Coursework
-My coursework from [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San Diego.
+My coursework from [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San Diego. Showcasing genomic analysis techniques, introductory machine learning, and protein folding and structure prediction.
 
 ## Index of Material
 
